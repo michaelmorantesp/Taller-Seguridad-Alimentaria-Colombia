@@ -1,0 +1,21 @@
+# docker-compose.yml
+# Ambiente completo: Jupyter + PySpark
+
+version: "3.8"
+
+services:
+  jupyter-spark:
+    image: jupyter/pyspark-notebook:latest
+    ports:
+      - "8888:8888"    # Jupyter Lab
+      - "4040:4040"    # Spark UI
+    volumes:
+      - ./notebooks:/home/jovyan/work
+      - ./datos_dane:/home/jovyan/datos_dane
+      - ./resultados:/home/jovyan/resultados
+      - ./WFP_Colombia_2024.pdf:/home/jovyan/WFP_Colombia_2024.pdf
+    environment:
+      - JUPYTER_ENABLE_LAB=yes
+      - JUPYTER_TOKEN=
+    command: start-notebook.sh --NotebookApp.token=''
+
