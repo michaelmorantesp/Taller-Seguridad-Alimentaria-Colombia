@@ -2,10 +2,8 @@
 ## Análisis de Datos No Estructurados con Docker, PySpark y Python
 
 **Autor:** Michael Morantes  
-**Universidad:** Universidad Santo Tomás (USTA)  
-**Asignatura:** Machine Learning con PySpark y Docker  
+**Universidad:** Universidad Santo Tomás (USTA) **Asignatura:** Machine Learning con pyspark y docker**Asignatura:** Machine Learning con PySpark y Docker  
 **Año:** 2026  
-**Última actualización:** Marzo 12, 2026  
 
 ---
 
@@ -104,5 +102,24 @@ taller-seguridad-alimentaria/
 │   └── grafico_correlaciones.png
 └── informe/
     └── informe_seguridad_alimentaria.pdf
+
+# Principales hallazgos
+
+1. La **media nacional de inseguridad alimentaria es 30.2%**, lo que indica que aproximadamente **3 de cada 10 hogares** presentan dificultades para acceder de forma estable a alimentos.
+
+2. Existe una **alta variabilidad entre departamentos** (desviación estándar de 10.9%), lo que evidencia importantes desigualdades territoriales en Colombia.
+
+3. **La Guajira presenta el nivel más alto de inseguridad alimentaria (59%)**, seguido por **Chocó (52%)**, mostrando una fuerte concentración del problema en regiones históricamente vulnerables.
+
+4. **Bogotá D.C. tiene el nivel más bajo (13%)**, lo que refleja diferencias significativas entre áreas urbanas con mayor infraestructura y regiones con mayores limitaciones socioeconómicas.
+
+5. La clasificación del WFP muestra que:
+   - 7 departamentos presentan **inseguridad baja**
+   - 6 presentan **nivel medio**
+   - 5 presentan **nivel alto**
+   - 3 presentan **nivel medio-alto**
+   - 2 presentan **niveles muy altos**
+
+6. En general, los resultados sugieren que la inseguridad alimentaria en Colombia **no está distribuida de forma uniforme**, sino que se concentra en regiones con mayores niveles de pobreza, aislamiento geográfico y menor acceso a servicios.
 
 ```
