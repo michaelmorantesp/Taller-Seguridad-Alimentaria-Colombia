@@ -89,21 +89,20 @@ Desde allí se puede ejecutar el notebook con el análisis.
 ```
 taller-seguridad-alimentaria/
 
-├── README.md
-├── Dockerfile
-├── docker-compose.yml
-├── requirements.txt
-│
+taller-seguridad-alimentaria/
+├── README.md                    # Descripción del proyecto
+├── Dockerfile                   # Su Dockerfile funcional
+├── docker-compose.yml           # Su archivo Compose
+├── requirements.txt             # Dependencias de Python
+├── datos/                       # Carpeta para datos (NO subir datos)
+│   └── .gitkeep                
 ├── notebooks/
-│   └── analisis.ipynb
-│
-├── datos_dane/
-│   └── archivos .dbf
-│
+│   └── analisis_completo.ipynb  # Su notebook con el análisis
 ├── resultados/
-│   ├── tablas_wfp/
-│   └── graficos/
-│
+│   ├── datos_combinados_wfp_dane.csv
+│   ├── grafico_inseguridad_departamentos.png
+│   └── grafico_correlaciones.png
 └── informe/
-    └── informe.pdf
+    └── informe_seguridad_alimentaria.pdf
+
 ```
