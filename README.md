@@ -102,7 +102,7 @@ taller-seguridad-alimentaria/
 │   └── grafico_correlaciones.png
 └── informe/
     └── informe_seguridad_alimentaria.pdf
-
+```
 # Principales hallazgos
 
 1. La **media nacional de inseguridad alimentaria es 30.2%**, lo que indica que aproximadamente **3 de cada 10 hogares** presentan dificultades para acceder de forma estable a alimentos.
@@ -121,5 +121,3 @@ taller-seguridad-alimentaria/
    - 2 presentan **niveles muy altos**
 
 6. En general, los resultados sugieren que la inseguridad alimentaria en Colombia **no está distribuida de forma uniforme**, sino que se concentra en regiones con mayores niveles de pobreza, aislamiento geográfico y menor acceso a servicios.
-
-```
