@@ -3,8 +3,9 @@
 
 **Autor:** Michael Morantes  
 **Universidad:** Universidad Santo Tomás (USTA)  
-**Asignatura:** Estadística / Análisis de Datos  
+**Asignatura:** Machine Learning con PySpark y Docker  
 **Año:** 2026  
+**Última actualización:** Marzo 12, 2026  
 
 ---
 
