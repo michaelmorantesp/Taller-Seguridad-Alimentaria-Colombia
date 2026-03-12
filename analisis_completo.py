@@ -37,65 +37,63 @@ pdf_path = "WFP_Colombia_2024.pdf"
 # Verificar que existe
 if os.path.exists(pdf_path):
     print(f"✓ PDF encontrado: {pdf_path}")
-    
-    # Explorar el PDF con pdfplumber
-    try:
-        with pdfplumber.open(pdf_path) as pdf:
-            print(f"El PDF tiene {len(pdf.pages)} páginas")
-            print("\nBuscando tablas en cada página...")
-            
-            for i, page in enumerate(pdf.pages):
-                tables = page.extract_tables()
-                if tables:
-                    print(f"  Página {i+1}: {len(tables)} tabla(s) encontrada(s)")
-
-        # Extraer TODAS las tablas con tabula-py
-        # tabula es más preciso para tablas con estructura clara
-
-        print("Extrayendo tablas con tabula-py...")
-        todas_las_tablas = tabula.read_pdf(
-            pdf_path, 
-            pages='all',           # Todas las páginas
-            multiple_tables=True,  # Múltiples tablas por página
-            silent=True            # Sin mensajes de Java
-        )
-
-        print(f"✓ Se extrajeron {len(todas_las_tablas)} tablas")
-
-        # Mostrar resumen de cada tabla
-        for i, df in enumerate(todas_las_tablas):
-            if len(df) > 0:
-                print(f"\nTabla {i+1}: {df.shape[0]} filas × {df.shape[1]} columnas")
-                print(f"  Columnas: {list(df.columns)[:5]}...")  # Primeras 5 columnas
-
-        # Buscar la tabla de inseguridad alimentaria por departamento
-        # Esta tabla típicamente tiene columnas como: Departamento, % Inseguridad, etc.
-
-        tabla_departamentos = None
-
-        for i, df in enumerate(todas_las_tablas):
-            # Buscar tablas que parezcan tener datos por departamento
-            columnas_texto = ' '.join(str(c).lower() for c in df.columns)
-            filas_texto = ' '.join(str(v).lower() for v in df.values.flatten()[:20])
-            
-            # Criterios: menciona departamento, o tiene nombres de departamentos conocidos
-            departamentos_conocidos = ['guajira', 'chocó', 'bogotá', 'antioquia', 'valle']
-            
-            if any(depto in filas_texto for depto in departamentos_conocidos):
-                print(f"\n>>> Tabla {i+1} parece contener datos por departamento:")
-                print(df.head(10))
-                tabla_departamentos = df.copy()
-                break
-
-        if tabla_departamentos is None:
-            print("No se encontró automáticamente. Usando datos manuales.")
-    except Exception as e:
-        print(f"Error al procesar el PDF: {e}")
-        print("Usando datos manuales del informe WFP.")
 else:
-    print(f"✗ No se encontró el PDF: {pdf_path}")
+    print(f"✗ No se encontró el PDF. Verifique la ruta.")
     print("  Esperado: WFP_Colombia_2024.pdf en la carpeta actual")
-    print("  Usando datos manuales basados en el informe WFP 2024.")
+
+# %%
+# Explorar el PDF con pdfplumber
+with pdfplumber.open(pdf_path) as pdf:
+    print(f"El PDF tiene {len(pdf.pages)} páginas")
+    print("\nBuscando tablas en cada página...")
+    
+    for i, page in enumerate(pdf.pages):
+        tables = page.extract_tables()
+        if tables:
+            print(f"  Página {i+1}: {len(tables)} tabla(s) encontrada(s)")
+
+# %%
+# Extraer TODAS las tablas con tabula-py
+# tabula es más preciso para tablas con estructura clara
+
+print("Extrayendo tablas con tabula-py...")
+todas_las_tablas = tabula.read_pdf(
+    pdf_path, 
+    pages='all',           # Todas las páginas
+    multiple_tables=True,  # Múltiples tablas por página
+    silent=True            # Sin mensajes de Java
+)
+
+print(f"✓ Se extrajeron {len(todas_las_tablas)} tablas")
+
+# Mostrar resumen de cada tabla
+for i, df in enumerate(todas_las_tablas):
+    if len(df) > 0:
+        print(f"\nTabla {i+1}: {df.shape[0]} filas × {df.shape[1]} columnas")
+        print(f"  Columnas: {list(df.columns)[:5]}...")  # Primeras 5 columnas
+
+# %%
+# Buscar la tabla de inseguridad alimentaria por departamento
+# Esta tabla típicamente tiene columnas como: Departamento, % Inseguridad, etc.
+
+tabla_departamentos = None
+
+for i, df in enumerate(todas_las_tablas):
+    # Buscar tablas que parezcan tener datos por departamento
+    columnas_texto = ' '.join(str(c).lower() for c in df.columns)
+    filas_texto = ' '.join(str(v).lower() for v in df.values.flatten()[:20])
+    
+    # Criterios: menciona departamento, o tiene nombres de departamentos conocidos
+    departamentos_conocidos = ['guajira', 'chocó', 'bogotá', 'antioquia', 'valle']
+    
+    if any(depto in filas_texto for depto in departamentos_conocidos):
+        print(f"\n>>> Tabla {i+1} parece contener datos por departamento:")
+        print(df.head(10))
+        tabla_departamentos = df.copy()
+        break
+
+if tabla_departamentos is None:
+    print("No se encontró automáticamente. Revisemos las tablas manualmente.")
 
 # %%
 # Si la extracción automática no funcionó perfectamente, 
